@@ -1,0 +1,706 @@
+{
+	"info": {
+		"_postman_id": "0be5149e-dcc7-4804-a042-d918ede39fdd",
+		"name": "competition la vie project",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23310010"
+	},
+	"item": [
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "Security",
+					"item": [
+						{
+							"name": "sign up",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"roleId\":\"63b2e0f1bfb822211ba3b93c\",\r\n    \"fName\":\"menna\",\r\n    \"lName\":\"salah\",\r\n    \"email\":\"menna@gmail.com\",\r\n    \"password\":\"123456\",\r\n    \"facebookEmail\":\"nejmetelbaher@yahoo.com\",\r\n    \"facebookPassword\":\"123456\",\r\n    \"Gmail\":\"menna@gmail.com\",\r\n    \"googlePassword\":\"123456\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{DBURL}}user/register",
+									"host": [
+										"{{DBURL}}user"
+									],
+									"path": [
+										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "login with app account normally",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\":\"mennasalah11199@gmail.com\",\r\n    \"password\":\"123456789\",\r\n    \"account\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{DBURL}}user/login",
+									"host": [
+										"{{DBURL}}user"
+									],
+									"path": [
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "login with facebook",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\":\"nejmetelbaher@yahoo.com\",\r\n    \"password\":\"123456\",\r\n    \"account\": \"facebook\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{DBURL}}user/login",
+									"host": [
+										"{{DBURL}}user"
+									],
+									"path": [
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "login with Gmail",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\":\"menna@gmail.com\",\r\n    \"password\":\"123456\",\r\n    \"account\": \"gmail\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{DBURL}}user/login",
+									"host": [
+										"{{DBURL}}user"
+									],
+									"path": [
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Reset Password",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"email\":\"mennasalah11199@gmail.com\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{DBURL}}password-reset/",
+									"host": [
+										"{{DBURL}}password-reset"
+									],
+									"path": [
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "password reset link",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"password\":\"123456789\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/password-reset/63b2fa3788fe0882d6e2e011/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2IyZmEzNzg4ZmUwODgyZDZlMmUwMTEiLCJpYXQiOjE2NzI2NzM4NzN9.3BkmGd4_J_DnK47EvL9dX8EGc2bYfZ16zBRp4q9ZmTo",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"password-reset",
+										"63b2fa3788fe0882d6e2e011",
+										"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2IyZmEzNzg4ZmUwODgyZDZlMmUwMTEiLCJpYXQiOjE2NzI2NzM4NzN9.3BkmGd4_J_DnK47EvL9dX8EGc2bYfZ16zBRp4q9ZmTo"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "logout from only this device",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{DBURL}}user/logout",
+									"host": [
+										"{{DBURL}}user"
+									],
+									"path": [
+										"logout"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "logout from all devices",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{DBURL}}user/logoutAll",
+									"host": [
+										"{{DBURL}}user"
+									],
+									"path": [
+										"logoutAll"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "My Profile",
+					"item": [
+						{
+							"name": "Show My Profile",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{DBURL}}user/me",
+									"host": [
+										"{{DBURL}}user"
+									],
+									"path": [
+										"me"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Edit My Profile",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"age\":\"22\",\r\n    \"Gmail\":\"mennasalah11199@gmail.com\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{DBURL}}user/editProfile",
+									"host": [
+										"{{DBURL}}user"
+									],
+									"path": [
+										"editProfile"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": null,
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add Adress",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"adressType\":\"home\",\r\n    \"details\":\"30 street\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{DBURL}}user/addAdress",
+									"host": [
+										"{{DBURL}}user"
+									],
+									"path": [
+										"addAdress"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Show all my addresses",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{DBURL}}user/allAdresses",
+									"host": [
+										"{{DBURL}}user"
+									],
+									"path": [
+										"allAdresses"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete all Addresses from my profile",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{DBURL}}user/deleteAddress",
+									"host": [
+										"{{DBURL}}user"
+									],
+									"path": [
+										"deleteAddress"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Upload or edit picture of my profile",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "mennaImage",
+											"type": "file",
+											"src": "/G:/pictures/WhatsApp Image 2022-10-25 at 11.52.46 AM.jpg",
+											"disabled": true
+										},
+										{
+											"key": "mennaImage",
+											"type": "file",
+											"src": "/G:/pictures/photo_5996554784179599908_x.jpg"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{DBURL}}user/uplaodImgToProfile",
+									"host": [
+										"{{DBURL}}user"
+									],
+									"path": [
+										"uplaodImgToProfile"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "roles",
+			"item": [
+				{
+					"name": "Add Role",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"admin\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DBURL}}role/addRole",
+							"host": [
+								"{{DBURL}}role"
+							],
+							"path": [
+								"addRole"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "url",
+			"item": [
+				{
+					"name": "Add URL",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"url\":\"/api/blog/addBlog\",\r\n    \"method\":\"POST\",\r\n    \"roles\":{\"roleId\":\"63b2e0f1bfb822211ba3b93c\"}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DBURL}}url/addUrl",
+							"host": [
+								"{{DBURL}}url"
+							],
+							"path": [
+								"addUrl"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Plants and seeds",
+			"item": [
+				{
+					"name": "Add plant or seed",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"type\":\"plant\",\r\n    \"category\":\"Trees\",\r\n    \"name\":\"family Tree\",\r\n    \"about\":\"this is a tree you can tack care of it\",\r\n    \"price\":\"20\",\r\n    \"Ease_of_cultivation\":\"easy\" \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/plant_seed/addPlantOrSeed",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"plant_seed",
+								"addPlantOrSeed"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Review on plant or seed",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"reviews\":\r\n    {\r\n        \"user_name\":\"menna\",\r\n        \"rating\":\"5\", \r\n        \"review\":\"it's very good tree\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DBURL}}plant_seed/addReview/63b48912f3c2f7b4be1963e1",
+							"host": [
+								"{{DBURL}}plant_seed"
+							],
+							"path": [
+								"addReview",
+								"63b48912f3c2f7b4be1963e1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "show all reviews of plant or seed by id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{DBURL}}plant_seed/showReview/63b48912f3c2f7b4be1963e1",
+							"host": [
+								"{{DBURL}}plant_seed"
+							],
+							"path": [
+								"showReview",
+								"63b48912f3c2f7b4be1963e1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Blogs",
+			"item": [
+				{
+					"name": "Add Blog",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"about\":\"plant\",\r\n    \"description\":\"lablablablaaaaaaaa\",\r\n    \"topic\":\"tree\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/blog/addBlog",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"blog",
+								"addBlog"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Comment on blog",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"comments\":\r\n    {\r\n        \"user_name\":\"menna\", \r\n        \"comment\":\"it's very good tree\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DBURL}}blog/addComment/63b4b90993f9dc2615235c1d",
+							"host": [
+								"{{DBURL}}blog"
+							],
+							"path": [
+								"addComment",
+								"63b4b90993f9dc2615235c1d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show all blogs",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{DBURL}}blog/showBlogs",
+							"host": [
+								"{{DBURL}}blog"
+							],
+							"path": [
+								"showBlogs"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "DBURL",
+			"value": "http://localhost:8080/api/",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2IyZmEzNzg4ZmUwODgyZDZlMmUwMTEiLCJpYXQiOjE2NzI3NDQ2Nzh9.DcNRWBULSvMGw-cvGnUc4LCO3mph7ehJDauLlA00bdk",
+			"type": "string"
+		}
+	]
+}
