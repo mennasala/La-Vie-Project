@@ -425,11 +425,15 @@
 							}
 						},
 						"url": {
-							"raw": "{{DBURL}}role/addRole",
+							"raw": "http://localhost:8080/api/role/addRole",
+							"protocol": "http",
 							"host": [
-								"{{DBURL}}role"
+								"localhost"
 							],
+							"port": "8080",
 							"path": [
+								"api",
+								"role",
 								"addRole"
 							]
 						}
@@ -454,7 +458,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"url\":\"/api/blog/addBlog\",\r\n    \"method\":\"POST\",\r\n    \"roles\":{\"roleId\":\"63b2e0f1bfb822211ba3b93c\"}\r\n}",
+							"raw": "{\r\n    \"url\":\"/api/shop/addShop\",\r\n    \"method\":\"POST\",\r\n    \"roles\":{\"roleId\":\"63b2e0f1bfb822211ba3b93c\"}\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -462,11 +466,15 @@
 							}
 						},
 						"url": {
-							"raw": "{{DBURL}}url/addUrl",
+							"raw": "http://localhost:8080/api/url/addUrl",
+							"protocol": "http",
 							"host": [
-								"{{DBURL}}url"
+								"localhost"
 							],
+							"port": "8080",
 							"path": [
+								"api",
+								"url",
 								"addUrl"
 							]
 						}
@@ -491,7 +499,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"type\":\"plant\",\r\n    \"category\":\"Trees\",\r\n    \"name\":\"family Tree\",\r\n    \"about\":\"this is a tree you can tack care of it\",\r\n    \"price\":\"20\",\r\n    \"Ease_of_cultivation\":\"easy\" \r\n}",
+							"raw": "{\r\n    \"type\":\"seed\",\r\n    \"category\":\"Trees\",\r\n    \"name\":\"family Tree\",\r\n    \"about\":\"this is a tree you can tack care of it\",\r\n    \"price\":\"20\",\r\n    \"Ease_of_cultivation\":\"easy\" \r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -570,6 +578,41 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "search specific plant or seed",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n     \"category\":\"trees\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DBURL}}plant_seed/search",
+							"host": [
+								"{{DBURL}}plant_seed"
+							],
+							"path": [
+								"search"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -589,7 +632,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"about\":\"plant\",\r\n    \"description\":\"lablablablaaaaaaaa\",\r\n    \"topic\":\"tree\"\r\n}",
+							"raw": "{\r\n    \"about\":\"plant\",\r\n    \"description\":\"helooooooooooooooooooooooooooooooooooo\",\r\n    \"topic\":\"nakhl\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -613,39 +656,6 @@
 					"response": []
 				},
 				{
-					"name": "Add Comment on blog",
-					"request": {
-						"method": "PATCH",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "{{token}}",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"comments\":\r\n    {\r\n        \"user_name\":\"menna\", \r\n        \"comment\":\"it's very good tree\"\r\n    }\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{DBURL}}blog/addComment/63b4b90993f9dc2615235c1d",
-							"host": [
-								"{{DBURL}}blog"
-							],
-							"path": [
-								"addComment",
-								"63b4b90993f9dc2615235c1d"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "Show all blogs",
 					"request": {
 						"method": "GET",
@@ -663,6 +673,389 @@
 							],
 							"path": [
 								"showBlogs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search Blog",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"about\":\"plant\",\r\n    \"topic\":\"tree\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DBURL}}blog/searchBlog",
+							"host": [
+								"{{DBURL}}blog"
+							],
+							"path": [
+								"searchBlog"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Single Blog",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{DBURL}}blog/deleteSingle/63b6a2460982c23e843657ba",
+							"host": [
+								"{{DBURL}}blog"
+							],
+							"path": [
+								"deleteSingle",
+								"63b6a2460982c23e843657ba"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete All Blogs",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{DBURL}}blog/deleteAll",
+							"host": [
+								"{{DBURL}}blog"
+							],
+							"path": [
+								"deleteAll"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Shops",
+			"item": [
+				{
+					"name": "Add Shop",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Elsalah\",\r\n    \"plants\":[\"63b5622bf0d1a9e80c76082f\"],\r\n    \"seeds\":[\"63b5726053e9547e144f278f\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/shop/addShop",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"shop",
+								"addShop"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show specific Shop and all its plants and seeds",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{DBURL}}shop/showShop/63b572aff1de429d5c6dc536",
+							"host": [
+								"{{DBURL}}shop"
+							],
+							"path": [
+								"showShop",
+								"63b572aff1de429d5c6dc536"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "BookMarks",
+			"item": [
+				{
+					"name": "Bookmark Plant Or Seed or Blog",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{DBURL}}user/bookmark/blog/63b4b90993f9dc2615235c1d",
+							"host": [
+								"{{DBURL}}user"
+							],
+							"path": [
+								"bookmark",
+								"blog",
+								"63b4b90993f9dc2615235c1d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show All Bookmarks",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{DBURL}}user/showBookMarks",
+							"host": [
+								"{{DBURL}}user"
+							],
+							"path": [
+								"showBookMarks"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Buy",
+			"item": [
+				{
+					"name": "Buy plant or seed",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{DBURL}}user/buy/63b5622bf0d1a9e80c76082f",
+							"host": [
+								"{{DBURL}}user"
+							],
+							"path": [
+								"buy",
+								"63b5622bf0d1a9e80c76082f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show Past Orderd",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{DBURL}}user/showPastOrders",
+							"host": [
+								"{{DBURL}}user"
+							],
+							"path": [
+								"showPastOrders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Past Orders From My Profile",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{DBURL}}user/deletePastOrders",
+							"host": [
+								"{{DBURL}}user"
+							],
+							"path": [
+								"deletePastOrders"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Comments and Notifications",
+			"item": [
+				{
+					"name": "Add Comment on blog then send notification to blog owner with your comment",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"comments\":\r\n    { \r\n        \"comment\":\"it's very good tree\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DBURL}}blog/addComment/63b6a396ade640da65db55be",
+							"host": [
+								"{{DBURL}}blog"
+							],
+							"path": [
+								"addComment",
+								"63b6a396ade640da65db55be"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Mark a notification as read",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{DBURL}}user/markNotificationAsRead/63b6a68464c1daf2385ed38e",
+							"host": [
+								"{{DBURL}}user"
+							],
+							"path": [
+								"markNotificationAsRead",
+								"63b6a68464c1daf2385ed38e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Mark All Notifications as read",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{DBURL}}user/markAllNotificationsAsRead",
+							"host": [
+								"{{DBURL}}user"
+							],
+							"path": [
+								"markAllNotificationsAsRead"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete All Notifications",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{DBURL}}user/deleteAllNotifications",
+							"host": [
+								"{{DBURL}}user"
+							],
+							"path": [
+								"deleteAllNotifications"
 							]
 						}
 					},
