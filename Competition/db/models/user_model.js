@@ -126,6 +126,7 @@ const userScema = mongoose.Schema(
     ],
 
     bookMarks: [],
+    pastOrderes: [],
     historyBought: [],
     points: {
       type: Number,
@@ -137,6 +138,7 @@ const userScema = mongoose.Schema(
         },
         read: {
           type: Boolean,
+          default:false
         },
       },
     ],

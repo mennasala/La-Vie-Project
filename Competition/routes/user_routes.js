@@ -22,13 +22,25 @@ router.patch("/deleteAddress", auth, User.deleteAddress);
 //show all addresses
 router.get("/allAdresses", auth, User.allAdresses);
 router.patch(
-    "/uplaodImgToProfile",
-    auth,
-    upload.single("mennaImage"),
-    User.uploadImage
-  );
+  "/uplaodImgToProfile",
+  auth,
+  upload.single("mennaImage"),
+  User.uploadImage
+);
 
+router.patch("/bookmark/:name/:id", auth, User.bookmark);
+router.get("/showBookMarks", auth, User.showBookMarks);
 
-router.get("/:id", auth, role_auth, User.all);
+router.patch("/buy/:id", auth, User.buyPlantOrSeed);
+router.get("/showPastOrders", auth, User.showPastOrders);
+router.patch("/deletePastOrders", auth, User.deletePastOrdersFromMyProfile);
+
+router.patch("/markNotificationAsRead/:id", auth, User.markNotificationAsRead);
+router.patch(
+  "/markAllNotificationsAsRead",
+  auth,
+  User.markAllNotificationsAsRead
+);
+router.patch("/deleteAllNotifications", auth, User.deleteAllNotifications);
 
 module.exports = router;

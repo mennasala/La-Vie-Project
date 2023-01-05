@@ -1,12 +1,16 @@
 const userModel = require("../../db/models/user_model");
+const blogModel = require("../../db/models/bolgs_model");
+const plantSeedModel = require("../../db/models/plants_seeds_model");
 const myHelper = require("../helper");
+
 const path = require("path");
 const fs = require("fs");
+const mongoose = require("mongoose");
+
 class User {
   static all = async (req, res) => {
     try {
       const users = await userModel.find();
-      //console.log(users);
       myHelper.sendResponse(
         res,
         200,
@@ -35,7 +39,7 @@ class User {
   };
 
   static login = async (req, res) => {
-    try { 
+    try {
       const userData = await userModel.loginUser(
         req.body.email,
         req.body.password,
@@ -54,9 +58,7 @@ class User {
     }
   };
 
-static forgetPassword=async(req,res)=>{
-  
-}
+  static forgetPassword = async (req, res) => {};
 
   static profile = (req, res) => {
     myHelper.sendResponse(
@@ -69,7 +71,6 @@ static forgetPassword=async(req,res)=>{
   };
   static logOut = async (req, res) => {
     try {
-      //req.user , req.token
       req.user.tokens = req.user.tokens.filter((t) => t.token != req.token);
       await req.user.save();
       myHelper.sendResponse(res, 200, true, null, "logged out");
@@ -79,7 +80,6 @@ static forgetPassword=async(req,res)=>{
   };
   static logOutAll = async (req, res) => {
     try {
-      //req.user , req.token
       req.user.tokens = [];
       await req.user.save();
       myHelper.sendResponse(res, 200, true, null, "logged out");
@@ -87,29 +87,6 @@ static forgetPassword=async(req,res)=>{
       myHelper.sendResponse(res, 500, false, e, e.message);
     }
   };
-  /*static getSingle = async (req, res) => {
-    try {
-      const user = await userModel.findById(req.params.id);
-      if (!user) throw new Error("User not found");
-      myHelper.sendResponse(res, 200, true, user, "successfully ");
-    } catch (e) {
-      myHelper.sendResponse(res, 500, false, e, e.message);
-    }
-  };*/
-  /*static changeStatus = async (req, res) => {
-    try {
-      let user = req.user;
-      if (!req.query.current || req.query.current == "0")
-        user = await userModel.findById(req.body._id);
-
-      if (req.query.activate == "1") user.status = true;
-      else user.status = false;
-      await user.save();
-      myHelper.sendResponse(res, 200, true, user, "updated");
-    } catch (e) {
-      myHelper.sendResponse(res, 500, false, e, e.message);
-    }
-  };*/
 
   static addAdress = async (req, res) => {
     try {
@@ -141,22 +118,6 @@ static forgetPassword=async(req,res)=>{
       myHelper.sendResponse(res, 500, false, e, e.message);
     }
   };
-  /*static singleAddress = async (req, res) => {
-    try {
-      const user = await userModel.findById(req.params.id);
-      if (!user || !user.adresses)
-        throw new Error("This user not found or has no address");
-      myHelper.sendResponse(
-        res,
-        200,
-        true,
-        user.adresses,
-        "found user address successfully"
-      );
-    } catch (e) {
-      myHelper.sendResponse(res, 500, false, e, e.message);
-    }
-  };*/
   static deleteAddress = async (req, res) => {
     try {
       const user = req.user;
@@ -183,11 +144,6 @@ static forgetPassword=async(req,res)=>{
       req.user.image = newImageName;
       await req.user.save();
       fs.renameSync(req.file.path, newImageName);
-
-      // res.send({
-      //   ...req.body,
-      //   file: newImageName,
-      // });
       myHelper.sendResponse(res, 200, true, req.user, "uploaded successfully");
     } catch (e) {
       myHelper.sendResponse(res, 500, false, e, e.message);
@@ -196,10 +152,6 @@ static forgetPassword=async(req,res)=>{
   static editProfile = async (req, res) => {
     try {
       let user = req.user;
-      /*console.log(user);
-      if (!req.query.current || req.query.current == "0") {
-        user = await userModel.findById(req.body._id);
-      }*/
       const data = req.body;
       for (const key in data) {
         user[key] = data[key];
@@ -210,19 +162,160 @@ static forgetPassword=async(req,res)=>{
       myHelper.sendResponse(res, 500, false, e, e.message);
     }
   };
-  /*static deleteProfile = async (req, res) => {
-    try {
-      let user;
-      if (!req.query.current || req.query.current == "0") {
-        user = await userModel.findByIdAndDelete(req.body._id);
-      } else {
-        user = await userModel.findByIdAndDelete(req.user._id);
-      }
 
-      myHelper.sendResponse(res, 200, true, user, "updated successfully");
+  static bookmark = async (req, res) => {
+    try {
+      let user = req.user;
+      user.bookMarks.push({
+        name: req.params.name,
+        id: req.params.id,
+      });
+      await user.save();
+      myHelper.sendResponse(res, 200, true, user, "bookmarked successfully");
     } catch (e) {
       myHelper.sendResponse(res, 500, false, e, e.message);
     }
-  };*/
+  };
+  static showBookMarks = async (req, res) => {
+    try {
+      const data = [];
+      const bookmarks = req.user.bookMarks;
+      console.log(bookmarks);
+      for (let i = 0; i < bookmarks.length; i++) {
+        let Data;
+        if (bookmarks[i].name == "plant" || bookmarks[i].name == "seed") {
+          Data = await plantSeedModel.findById(
+            mongoose.Types.ObjectId(bookmarks[i].id)
+          );
+        } else {
+          Data = await blogModel.findById(
+            mongoose.Types.ObjectId(bookmarks[i].id)
+          );
+        }
+        data.push(Data);
+      }
+      myHelper.sendResponse(
+        res,
+        200,
+        true,
+        data,
+        "fetched all bookmarks successfully"
+      );
+    } catch (e) {
+      myHelper.sendResponse(res, 500, false, e, e.message);
+    }
+  };
+
+  static buyPlantOrSeed = async (req, res) => {
+    try {
+      const plantSeed = await plantSeedModel.findById(
+        mongoose.Types.ObjectId(req.params.id)
+      );
+      req.user.pastOrderes.push(req.params.id);
+      await req.user.save();
+      myHelper.sendResponse(
+        res,
+        200,
+        true,
+        plantSeed,
+        `You have to pay ${plantSeed.price} dollar`
+      );
+    } catch (e) {
+      myHelper.sendResponse(res, 500, false, e, e.message);
+    }
+  };
+
+  static showPastOrders = async (req, res) => {
+    try {
+      const past_order = req.user.pastOrderes;
+      const data = [];
+      for (let i = 0; i < past_order.length; i++) {
+        data.push(
+          await plantSeedModel.findById(mongoose.Types.ObjectId(past_order[i]))
+        );
+      }
+      myHelper.sendResponse(
+        res,
+        200,
+        true,
+        data,
+        "Fetched All Past orders Sussessfully"
+      );
+    } catch (e) {
+      myHelper.sendResponse(res, 500, false, e, e.message);
+    }
+  };
+
+  static deletePastOrdersFromMyProfile = async (req, res) => {
+    try {
+      req.user.pastOrderes = [];
+      await req.user.save();
+      myHelper.sendResponse(
+        res,
+        200,
+        true,
+        req.user.pastOrderes,
+        "Deleted All Past orders Sussessfully"
+      );
+    } catch (e) {
+      myHelper.sendResponse(res, 500, false, e, e.message);
+    }
+  };
+
+  static markNotificationAsRead = async (req, res) => {
+    try {
+      const data = req.user.notifications;
+      const notification = data.find((obj) => obj._id == req.params.id);
+      notification.read = true;
+      await req.user.save();
+
+      myHelper.sendResponse(
+        res,
+        200,
+        true,
+        notification,
+        "Notification Marked as read successfully"
+      );
+    } catch (e) {
+      myHelper.sendResponse(res, 500, false, e, e.message);
+    }
+  };
+
+  static markAllNotificationsAsRead = async (req, res) => {
+    try {
+      const allNotifications = req.user.notifications;
+      for (let i = 0; i < allNotifications.length; i++) {
+        allNotifications[i].read = true;
+      }
+
+      await req.user.save();
+      myHelper.sendResponse(
+        res,
+        200,
+        true,
+        allNotifications,
+        "All Notifications Marked as read successfully"
+      );
+    } catch (e) {
+      myHelper.sendResponse(res, 500, false, e, e.message);
+    }
+  };
+
+  static deleteAllNotifications = async (req, res) => {
+    try {
+       req.user.notifications=[]
+      await req.user.save();
+
+      myHelper.sendResponse(
+        res,
+        200,
+        true,
+        "",
+        "All Notifications deleted successfully"
+      );
+    } catch (e) {
+      myHelper.sendResponse(res, 500, false, e, e.message);
+    }
+  };
 }
 module.exports = User;

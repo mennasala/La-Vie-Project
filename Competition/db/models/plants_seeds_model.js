@@ -34,10 +34,10 @@ const PalntsSeedsSchema = mongoose.Schema({
     type: String,
     required: true,
     enum: ["easy", "medium", "hard"],
-  },
+  }, 
   reviews: [
     {
-      user_name:{
+      user_name: {
         type: String,
         trim: true,
         lowercase: true,
@@ -59,5 +59,5 @@ const PalntsSeedsSchema = mongoose.Schema({
   ],
 });
 
-const PalntsSeeds = mongoose.model("PalntsSeedsSchema", PalntsSeedsSchema);
+const PalntsSeeds = mongoose.model("PalntsSeeds", PalntsSeedsSchema);
 module.exports = PalntsSeeds;
