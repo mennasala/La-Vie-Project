@@ -7,6 +7,4 @@ const role_auth = require("../app/midleware/role_midleware");
 router.post("/addShop", auth, role_auth, shop.addShop);
 router.get("/showShop/:id", auth, shop.showSingleShop);
 
-//router.post("/findNearestShop",auth,shop.findNearestShop)
-
 module.exports = router;
